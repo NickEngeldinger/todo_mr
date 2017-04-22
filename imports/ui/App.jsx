@@ -23,11 +23,11 @@ export default class App extends Component {
 				<header>
 					<h1>To Do List</h1>
 				</header>
-			</div>
 
-			<ul>
-				{ this.renderTasks() }
-			</ul>
+				<ul>
+					{ this.renderTasks() }
+				</ul>
+			</div>
 		);
 	}
 }
