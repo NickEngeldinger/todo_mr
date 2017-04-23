@@ -1,10 +1,24 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Tasks } from '../api/tasks.js';
 import Task from './Task.jsx';
 
 //App component - represents entire app
 class App extends Component {
+	handleSubmit(event) {
+		event.preventDefault;
+
+		const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+
+		Tasks.insert({
+			text,
+			createdAt: new Date(),
+		});
+
+		ReactDom.findDOMNode(this.refs.textInput).value = '';
+	}
+
 	renderTasks() {
 		return this.props.tasks.map((task) => (
 			<Task key={task.id} task={task} />
@@ -17,6 +31,14 @@ class App extends Component {
 				<header>
 					<h1>To Do List</h1>
 				</header>
+
+				<form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+					<input
+						type="text"
+						ref="textInput"
+						placeholder="Enter new task"
+					/>
+				</form>
 
 				<ul>
 					{ this.renderTasks() }
@@ -32,6 +54,6 @@ App.propTypes = {
 
 export default createContainer(() => {
 	return {
-		tasks: Tasks.find({}).fetch()
+		tasks: Tasks.find({}, {sort: { createdAt: -1 }}).fetch()
 	};
 }, App);
