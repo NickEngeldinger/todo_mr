@@ -36,13 +36,9 @@ Meteor.methods({
 		check(taskId, String);
 
 		const task = Tasks.findOne(taskId);
-		if (task.private && task.owner !== Meteor.userId()) {
+		if (task.owner !== Meteor.userId()) {
 			throw new Meteor.Error('not-authorized');
 		} 
-		else if ( task.owner !== Meteor.userId()) {
-			alert('You can only delete tasks that you\'ve created');
-			throw new Meteor.Error('not-authorized');
-		}
 
 		Tasks.remove(taskId);
 	},
