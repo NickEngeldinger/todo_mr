@@ -10,6 +10,11 @@
     "meteor-node-stubs": "~0.2.4",
     "react": "^15.5.4",
     "react-addons-pure-render-mixin": "^15.5.2",
-    "react-dom": "^15.5.4"
+    "react-addons-test-utils": "^15.5.1",
+    "react-dom": "^15.5.4",
+    "react-test-renderer": "^15.5.4"
+  },
+  "devDependencies": {
+    "enzyme": "^2.8.2"
   }
 }
